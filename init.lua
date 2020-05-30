@@ -1,4 +1,4 @@
--- PasteBoardExt spoon
+--- === PasteBoardExt ===
 -- Various functions related to the PasteBoard
 local s = {}
 
@@ -18,32 +18,30 @@ s.cmd = hs.spoons.resourcePath("/bin/pbedit.sh")
 s.log = hs.logger.new("PasteBoardExt")
 
 -- PasteBoardExt:debug() {{{ --
---- Enable or disable debugging
+--- PasteBoardExt:debug(enable)
 --- Method
+--- Enable or disable debugging
 ---
 --- Parameters:
 ---  * enable - Boolean indicating whether debugging should be on
 ---
 --- Returns:
 ---  * Nothing
-s.debug = function(self, enable)
+function s:debug(enable)
   if enable then
-    self.log.setLogLevel('debug')
-    self.log.d("Debugging enabled")
+    s.log.setLogLevel('debug')
+    s.log.d("Debugging enabled")
   else
-    self.log.d("Disabling debugging")
-    self.log.setLogLevel('info')
+    s.log.d("Disabling debugging")
+    s.log.setLogLevel('info')
   end
 end
--- }}}  PasteBoardExt:debug() --
+-- }}} PasteBoardExt:debug() --
 
 -- PasteBoardExt:bindHotKey() {{{ --
 --- PasteBoardExt:bindHotKey(self, table)
 --- Method
---- Bind keys to methods.
----
---- Parameters:
----  * table - Table of action to key mappings, e.g.
+--- Bind keys to methods, e.g.:
 ---   {
 ---     clean = {{"cmd", "alt"}, "c"},
 ---     keyStrokes = {{"cmd", "alt"}, "v"},
@@ -51,10 +49,13 @@ end
 ---     openURL = {{"cmd", "alt"}, "o"}
 --    }
 ---
+--- Parameters:
+---  * table - Table of action to key mappings.
+---
 --- Returns:
 ---  * PasteBoardExt object
 
-s.bindHotKeys = function(self, table)
+function s:bindHotKeys(table)
   for feature,mapping in pairs(table) do
     if feature == "clean" then
        self.hotkey = hs.hotkey.bind(mapping[1], mapping[2],
@@ -69,10 +70,10 @@ s.bindHotKeys = function(self, table)
        self.hotkey = hs.hotkey.bind(mapping[1], mapping[2],
          function() self:openURL() end)
      else
-       log.wf("Unrecognized key binding feature '%s'", feature)
+       s.log.wf("Unrecognized key binding feature '%s'", feature)
      end
    end
-  return self
+  return s
 end
 -- }}} PasteBoardExt:bindHotKey() --
 
@@ -88,7 +89,7 @@ end
 ---
 --- Returns:
 --- * Nothing
-function s.clean(self)
+function s:clean()
   local text = nil
   local stext = hs.pasteboard.readStyledText()
   if stext then
@@ -97,7 +98,7 @@ function s.clean(self)
     text = hs.pasteboard.readString()
   end
   if text then
-    self.log.d("Cleaning pasteboard.")
+    s.log.d("Cleaning pasteboard.")
     -- Trim non-ascii
     -- Pasteboard strings can have stuff that looks like whitespace
     -- but doesn't match %s
@@ -105,10 +106,10 @@ function s.clean(self)
     -- Trim leading and trailing whitespace
     text = text:gsub("[^\x20-\x7E]", ""):gsub("^%s+", ""):gsub("%s+$", "")
     if not hs.pasteboard.setContents(text) then
-      self.log.w("Failed to set pasteboard contents.")
+      s.log.w("Failed to set pasteboard contents.")
     end
   else
-    self.log.d("Pasteboard empty.")
+    s.log.d("Pasteboard empty.")
   end
 end
 -- }}} PasteBoardExt:clean() --
