@@ -58,17 +58,17 @@ end
 function s:bindHotKeys(table)
   for feature,mapping in pairs(table) do
     if feature == "clean" then
-       self.hotkey = hs.hotkey.bind(mapping[1], mapping[2],
-         function() self:clean() end)
+       s.hotkey = hs.hotkey.bind(mapping[1], mapping[2],
+         function() s:clean() end)
     elseif feature == "keyStrokes" then
-       self.hotkey = hs.hotkey.bind(mapping[1], mapping[2],
-         function() self:keyStrokes() end)
+       s.hotkey = hs.hotkey.bind(mapping[1], mapping[2],
+         function() s:keyStrokes() end)
     elseif feature == "edit" then
-       self.hotkey = hs.hotkey.bind(mapping[1], mapping[2],
-         function() self:edit() end)
+       s.hotkey = hs.hotkey.bind(mapping[1], mapping[2],
+         function() s:edit() end)
     elseif feature == "openURL" then
-       self.hotkey = hs.hotkey.bind(mapping[1], mapping[2],
-         function() self:openURL() end)
+       s.hotkey = hs.hotkey.bind(mapping[1], mapping[2],
+         function() s:openURL() end)
      else
        s.log.wf("Unrecognized key binding feature '%s'", feature)
      end
