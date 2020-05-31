@@ -38,16 +38,11 @@ function s:debug(enable)
 end
 -- }}} PasteBoardExt:debug() --
 
--- PasteBoardExt:bindHotKey() {{{ --
---- PasteBoardExt:bindHotKey(self, table)
+-- PasteBoardExt:bindHotKeys() {{{ --
+--- PasteBoardExt:bindHotKeys(table)
 --- Method
---- Bind keys to methods, e.g.:
----   {
----     clean = {{"cmd", "alt"}, "c"},
----     keyStrokes = {{"cmd", "alt"}, "v"},
----     edit = {{"cmd", "alt"}, "e"},
----     openURL = {{"cmd", "alt"}, "o"}
---    }
+--- Bind keys to methods. Valid keys for provided table are "clean", "keystrokes",
+--- "edit", "openURL"
 ---
 --- Parameters:
 ---  * table - Table of action to key mappings.
@@ -75,7 +70,7 @@ function s:bindHotKeys(table)
    end
   return s
 end
--- }}} PasteBoardExt:bindHotKey() --
+-- }}} PasteBoardExt:bindHotKeys() --
 
 -- PasteBoardExt:clean() {{{ --
 --- PasteBoardExt:clean()

@@ -1,2 +1,2 @@
 docs.json: init.lua
-	hs -c "hs.doc.builder.genJSON(\"$(pwd)\")" | grep -v "^--" > $@
+	hs -c "hs.doc.builder.genJSON(\"${CURDIR}\")" | grep -v "^--" > $@ || rm -f $@
