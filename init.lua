@@ -140,7 +140,7 @@ end
 -- }}} PasteBoardExt:keyStrokes() --
 
 -- PasteBoardExt:edit() {{{ --
---- PasteBoardExt.edit()
+--- PasteBoardExt:edit()
 --- Method
 --- Edit the PasteBuffer.
 --- Currently uses MacVim and is specific to the Mac.
