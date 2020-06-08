@@ -1,21 +1,38 @@
 --- === PasteBoardExt ===
--- Various functions related to the PasteBoard
-local s = {}
+--- Various functions related to the PasteBoard
+local PasteBoardExt = {}
 
--- Metadata
-s.name="PasteBoardExt"
-s.version="0.1"
-s.author="Von Welch"
+-- Metadata {{{ --
+PasteBoardExt.name="PasteBoardExt"
+PasteBoardExt.version="0.1"
+PasteBoardExt.author="Von Welch"
 -- https://opensource.org/licenses/Apache-2.0
-s.license="Apache-2.0"
-s.homepage="https://github.com/von/PasteBoardExt.spoon"
+PasteBoardExt.license="Apache-2.0"
+PasteBoardExt.homepage="https://github.com/von/PasteBoardExt.spoon"
+-- }}} Metadata --
 
--- Constants
-s.path = hs.spoons.scriptPath()
-s.cmd = hs.spoons.resourcePath("/bin/pbedit.sh")
-
--- Set up logger for spoon
-s.log = hs.logger.new("PasteBoardExt")
+-- PasteBoardExt:init() {{{ --
+--- PasteBoardExt:init()
+--- Method
+--- Initializes a PasteBoardExt
+--- When a user calls hs.loadSpoon(), Hammerspoon will load and execute init.lua
+--- from the relevant s.
+--- Do generally not perform any work, map any hotkeys, start any timers/watchers/etc.
+--- in the main scope of your init.lua. Instead, it should simply prepare an object
+--- with methods to be used later, then return the object.
+---
+--- Parameters:
+---  * None
+---
+--- Returns:
+---  * PasteBoardExt object
+function PasteBoardExt:init()
+  self.log = hs.logger.new("PasteBoardExt")
+  self.path = hs.spoons.scriptPath()
+  self.cmd = hs.spoons.resourcePath("/bin/pbedit.sh")
+  return self
+end
+-- }}} PasteBoardExt:init() --
 
 -- PasteBoardExt:debug() {{{ --
 --- PasteBoardExt:debug(enable)
@@ -27,13 +44,13 @@ s.log = hs.logger.new("PasteBoardExt")
 ---
 --- Returns:
 ---  * Nothing
-function s:debug(enable)
+function PasteBoardExt:debug(enable)
   if enable then
-    s.log.setLogLevel('debug')
-    s.log.d("Debugging enabled")
+    self.log.setLogLevel('debug')
+    self.log.d("Debugging enabled")
   else
-    s.log.d("Disabling debugging")
-    s.log.setLogLevel('info')
+    self.log.d("Disabling debugging")
+    self.log.setLogLevel('info')
   end
 end
 -- }}} PasteBoardExt:debug() --
@@ -50,25 +67,21 @@ end
 --- Returns:
 ---  * PasteBoardExt object
 
-function s:bindHotKeys(table)
+function PasteBoardExt:bindHotKeys(table)
   for feature,mapping in pairs(table) do
     if feature == "clean" then
-       s.hotkey = hs.hotkey.bind(mapping[1], mapping[2],
-         function() s:clean() end)
+       hs.hotkey.bind(mapping[1], mapping[2], function() self:clean() end)
     elseif feature == "keyStrokes" then
-       s.hotkey = hs.hotkey.bind(mapping[1], mapping[2],
-         function() s:keyStrokes() end)
+       hs.hotkey.bind(mapping[1], mapping[2], function() self:keyStrokes() end)
     elseif feature == "edit" then
-       s.hotkey = hs.hotkey.bind(mapping[1], mapping[2],
-         function() s:edit() end)
+       hs.hotkey.bind(mapping[1], mapping[2], function() self:edit() end)
     elseif feature == "openURL" then
-       s.hotkey = hs.hotkey.bind(mapping[1], mapping[2],
-         function() s:openURL() end)
+       hs.hotkey.bind(mapping[1], mapping[2], function() self:openURL() end)
      else
        s.log.wf("Unrecognized key binding feature '%s'", feature)
      end
    end
-  return s
+  return self
 end
 -- }}} PasteBoardExt:bindHotKeys() --
 
@@ -84,7 +97,7 @@ end
 ---
 --- Returns:
 --- * Nothing
-function s:clean()
+function PasteBoardExt:clean()
   local text = nil
   local stext = hs.pasteboard.readStyledText()
   if stext then
@@ -93,7 +106,7 @@ function s:clean()
     text = hs.pasteboard.readString()
   end
   if text then
-    s.log.d("Cleaning pasteboard.")
+    self.log.d("Cleaning pasteboard.")
     -- Trim non-ascii
     -- Pasteboard strings can have stuff that looks like whitespace
     -- but doesn't match %s
@@ -101,10 +114,10 @@ function s:clean()
     -- Trim leading and trailing whitespace
     text = text:gsub("[^\x20-\x7E]", ""):gsub("^%s+", ""):gsub("%s+$", "")
     if not hs.pasteboard.setContents(text) then
-      s.log.w("Failed to set pasteboard contents.")
+      self.log.w("Failed to set pasteboard contents.")
     end
   else
-    s.log.d("Pasteboard empty.")
+    self.log.d("Pasteboard empty.")
   end
 end
 -- }}} PasteBoardExt:clean() --
@@ -119,7 +132,7 @@ end
 ---
 --- Returns:
 --- * Nothing
-function s.keyStrokes(self)
+function PasteBoardExt:keyStrokes()
   local text = hs.pasteboard.getContents()
   hs.eventtap.keyStrokes(text)
 end
@@ -137,7 +150,7 @@ end
 ---
 --- Returns:
 --- * None
-function s.edit(self)
+function PasteBoardExt:edit()
   -- Save focused widow so we can restore it
   local focusedWindow = nil
   local frontApp = hs.application.frontmostApplication()
