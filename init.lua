@@ -170,21 +170,35 @@ end
 ---
 --- Returns:
 --- * True on success, false on failure
-function s.openURL(self)
-  -- XXX This won't return a URL in stylized text
-  local url = hs.pasteboard.readURL()
-  if url then
-    local handler = hs.urlevent.getDefaultHandler(string.match(url, "(%a+):"))
-    if hander then
-      hs.urlevent.openURLWithBundle(url, handler)
-    else
-      hs.alert.show("No handler for URL.")
-    end
-  else
-    hs.alert.show("No URL in clipboard")
+function PasteBoardExt:openURL()
+  -- We don't use hs.pareboard.readURL() here because it is very fragile and
+  -- breaks if there is any unusal characters in the pasteboard, which I'm
+  -- seeing copying links from Chrome do frequently.
+  local url = hs.pasteboard.readString()
+  -- local url = hs.pasteboard.readURL()
+  if not url then
+    hs.alert.show("Clipboard empty")
+    return false
   end
+  -- Remove any non-ascii characters
+  url = url:gsub("[^\x20-\x7E]", "")
+  -- Trim leading and trailing whitespace
+  url = url:gsub("[^\x20-\x7E]", ""):gsub("^%s+", ""):gsub("%s+$", "")
+  local protocol = string.match(url, "(%a+):")
+  if not protocol then
+    hs.alert("Not recognizable URL in clipboard")
+    self.log.df("Not recognizable URL in clipboard: %s", url)
+    return false
+  end
+  local handler = hs.urlevent.getDefaultHandler(protocol)
+  if not handler then
+    hs.alert("Not handler for protocol " .. protocol)
+    self.log.df("No hander for protocol (%s): %s", protocol, url)
+    return false
+  end
+  hs.urlevent.openURLWithBundle(url, handler)
 end
 -- }}} PasteBoardExt:openURL() --
 
-return s
+return PasteBoardExt
 -- vim: foldmethod=marker:
