@@ -158,9 +158,14 @@ function PasteBoardExt:edit()
     focusedWindow = frontApp:focusedWindow()
   end
   local callback = function(exitCode, stdOut, stdErr)
-    self.log.df("Restoring %s", focusedWindow:title())
-    focusedWindow:application():activate()
-    focusedWindow:focus()
+    if frontApp then
+      self.log.df("Reactivating %s", frontApp:title())
+      frontApp:activate()
+      if focusedWindow then
+        self.log.df("Focusing %s", focusedWindow:title())
+        focusedWindow:focus()
+      end
+    end
     if exitCode ~= 0 then
       self.log.wf("Edit failed: %s", stdErr)
     end
