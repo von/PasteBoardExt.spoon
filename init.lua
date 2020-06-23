@@ -98,12 +98,13 @@ end
 --- Returns:
 --- * Nothing
 function PasteBoardExt:clean()
-  local text = nil
-  local stext = hs.pasteboard.readStyledText()
-  if stext then
-    text = stext:getString()
-  else
-    text = hs.pasteboard.readString()
+  local text = hs.pasteboard.readString()
+  if not text then
+    local stext = hs.pasteboard.readStyledText()
+    if stext then
+      log.d("Converting from StyledText")
+      text = stext:getString()
+    end
   end
   if text then
     self.log.d("Cleaning pasteboard.")
@@ -112,7 +113,7 @@ function PasteBoardExt:clean()
     -- but doesn't match %s
     text = text:gsub("[^\x20-\x7E]", "")
     -- Trim leading and trailing whitespace
-    text = text:gsub("[^\x20-\x7E]", ""):gsub("^%s+", ""):gsub("%s+$", "")
+    text = text:gsub("^%s+", ""):gsub("%s+$", "")
     if not hs.pasteboard.setContents(text) then
       self.log.w("Failed to set pasteboard contents.")
     end
