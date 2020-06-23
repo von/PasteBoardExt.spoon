@@ -108,10 +108,6 @@ function PasteBoardExt:clean()
   end
   if text then
     self.log.d("Cleaning pasteboard.")
-    -- Trim non-ascii
-    -- Pasteboard strings can have stuff that looks like whitespace
-    -- but doesn't match %s
-    text = text:gsub("[^\x20-\x7E]", "")
     -- Trim leading and trailing whitespace
     text = text:gsub("^%s+", ""):gsub("%s+$", "")
     if not hs.pasteboard.setContents(text) then
