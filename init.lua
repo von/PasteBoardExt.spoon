@@ -4,7 +4,7 @@ local PasteBoardExt = {}
 
 -- Metadata {{{ --
 PasteBoardExt.name="PasteBoardExt"
-PasteBoardExt.version="0.1"
+PasteBoardExt.version="0.2"
 PasteBoardExt.author="Von Welch"
 -- https://opensource.org/licenses/Apache-2.0
 PasteBoardExt.license="Apache-2.0"
