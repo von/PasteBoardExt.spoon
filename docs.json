@@ -23,6 +23,13 @@
     "Constructor" : [
 
     ],
+    "doc" : "Various functions related to the PasteBoard",
+    "Field" : [
+
+    ],
+    "Command" : [
+
+    ],
     "items" : [
       {
         "name" : "bindHotKeys",
@@ -31,11 +38,8 @@
           "\"edit\", \"openURL\"",
           ""
         ],
-        "parameters" : [
-          " * table - Table of action to key mappings.",
-          ""
-        ],
         "doc" : "Bind keys to methods. Valid keys for provided table are \"clean\", \"keystrokes\",\n\"edit\", \"openURL\"\n\nParameters:\n * table - Table of action to key mappings.\n\nReturns:\n * PasteBoardExt object",
+        "def" : "PasteBoardExt:bindHotKeys(table)",
         "notes" : [
 
         ],
@@ -45,7 +49,10 @@
           " * PasteBoardExt object"
         ],
         "desc" : "Bind keys to methods. Valid keys for provided table are \"clean\", \"keystrokes\",",
-        "def" : "PasteBoardExt:bindHotKeys(table)"
+        "parameters" : [
+          " * table - Table of action to key mappings.",
+          ""
+        ]
       },
       {
         "name" : "clean",
@@ -55,11 +62,8 @@
           "  * Remove leading and training whitepace",
           ""
         ],
-        "parameters" : [
-          "* None",
-          ""
-        ],
         "doc" : "Clean up the pasteboard:\n  * Convert stylized text to plain text\n  * Remove leading and training whitepace\n\nParameters:\n* None\n\nReturns:\n* Nothing",
+        "def" : "PasteBoardExt:clean()",
         "notes" : [
 
         ],
@@ -69,7 +73,10 @@
           "* Nothing"
         ],
         "desc" : "Clean up the pasteboard:",
-        "def" : "PasteBoardExt:clean()"
+        "parameters" : [
+          "* None",
+          ""
+        ]
       },
       {
         "name" : "debug",
@@ -77,11 +84,8 @@
           "Enable or disable debugging",
           ""
         ],
-        "parameters" : [
-          " * enable - Boolean indicating whether debugging should be on",
-          ""
-        ],
         "doc" : "Enable or disable debugging\n\nParameters:\n * enable - Boolean indicating whether debugging should be on\n\nReturns:\n * Nothing",
+        "def" : "PasteBoardExt:debug(enable)",
         "notes" : [
 
         ],
@@ -91,7 +95,10 @@
           " * Nothing"
         ],
         "desc" : "Enable or disable debugging",
-        "def" : "PasteBoardExt:debug(enable)"
+        "parameters" : [
+          " * enable - Boolean indicating whether debugging should be on",
+          ""
+        ]
       },
       {
         "name" : "edit",
@@ -100,21 +107,21 @@
           "Currently uses MacVim and is specific to the Mac.",
           ""
         ],
-        "parameters" : [
-          "* None",
-          ""
-        ],
         "doc" : "Edit the PasteBuffer.\nCurrently uses MacVim and is specific to the Mac.\n\nParameters:\n* None\n\nReturns:\n* None",
+        "def" : "PasteBoardExt:edit()",
         "notes" : [
 
         ],
-        "signature" : "PasteBoardExt.edit()",
+        "signature" : "PasteBoardExt:edit()",
         "type" : "Method",
         "returns" : [
           "* None"
         ],
         "desc" : "Edit the PasteBuffer.",
-        "def" : "PasteBoardExt.edit()"
+        "parameters" : [
+          "* None",
+          ""
+        ]
       },
       {
         "name" : "init",
@@ -127,11 +134,8 @@
           "with methods to be used later, then return the object.",
           ""
         ],
-        "parameters" : [
-          " * None",
-          ""
-        ],
         "doc" : "Initializes a PasteBoardExt\nWhen a user calls hs.loadSpoon(), Hammerspoon will load and execute init.lua\nfrom the relevant s.\nDo generally not perform any work, map any hotkeys, start any timers\/watchers\/etc.\nin the main scope of your init.lua. Instead, it should simply prepare an object\nwith methods to be used later, then return the object.\n\nParameters:\n * None\n\nReturns:\n * PasteBoardExt object",
+        "def" : "PasteBoardExt:init()",
         "notes" : [
 
         ],
@@ -141,7 +145,10 @@
           " * PasteBoardExt object"
         ],
         "desc" : "Initializes a PasteBoardExt",
-        "def" : "PasteBoardExt:init()"
+        "parameters" : [
+          " * None",
+          ""
+        ]
       },
       {
         "name" : "keyStrokes",
@@ -149,11 +156,8 @@
           "Paste PasteBoard using hs.eventtap,keyStrokes()",
           ""
         ],
-        "parameters" : [
-          "* None",
-          ""
-        ],
         "doc" : "Paste PasteBoard using hs.eventtap,keyStrokes()\n\nParameters:\n* None\n\nReturns:\n* Nothing",
+        "def" : "PasteBoardExt:keyStrokes()",
         "notes" : [
 
         ],
@@ -163,7 +167,10 @@
           "* Nothing"
         ],
         "desc" : "Paste PasteBoard using hs.eventtap,keyStrokes()",
-        "def" : "PasteBoardExt:keyStrokes()"
+        "parameters" : [
+          "* None",
+          ""
+        ]
       },
       {
         "name" : "openURL",
@@ -171,11 +178,8 @@
           "Open URL in clipboard",
           ""
         ],
-        "parameters" : [
-          "* None",
-          ""
-        ],
         "doc" : "Open URL in clipboard\n\nParameters:\n* None\n\nReturns:\n* True on success, false on failure",
+        "def" : "PasteBoardExt:openURL()",
         "notes" : [
 
         ],
@@ -185,12 +189,11 @@
           "* True on success, false on failure"
         ],
         "desc" : "Open URL in clipboard",
-        "def" : "PasteBoardExt:openURL()"
+        "parameters" : [
+          "* None",
+          ""
+        ]
       }
-    ],
-    "doc" : "Various functions related to the PasteBoard",
-    "Field" : [
-
     ],
     "Method" : [
       {
@@ -204,11 +207,8 @@
           "with methods to be used later, then return the object.",
           ""
         ],
-        "parameters" : [
-          " * None",
-          ""
-        ],
         "doc" : "Initializes a PasteBoardExt\nWhen a user calls hs.loadSpoon(), Hammerspoon will load and execute init.lua\nfrom the relevant s.\nDo generally not perform any work, map any hotkeys, start any timers\/watchers\/etc.\nin the main scope of your init.lua. Instead, it should simply prepare an object\nwith methods to be used later, then return the object.\n\nParameters:\n * None\n\nReturns:\n * PasteBoardExt object",
+        "def" : "PasteBoardExt:init()",
         "notes" : [
 
         ],
@@ -218,7 +218,10 @@
           " * PasteBoardExt object"
         ],
         "desc" : "Initializes a PasteBoardExt",
-        "def" : "PasteBoardExt:init()"
+        "parameters" : [
+          " * None",
+          ""
+        ]
       },
       {
         "name" : "debug",
@@ -226,11 +229,8 @@
           "Enable or disable debugging",
           ""
         ],
-        "parameters" : [
-          " * enable - Boolean indicating whether debugging should be on",
-          ""
-        ],
         "doc" : "Enable or disable debugging\n\nParameters:\n * enable - Boolean indicating whether debugging should be on\n\nReturns:\n * Nothing",
+        "def" : "PasteBoardExt:debug(enable)",
         "notes" : [
 
         ],
@@ -240,7 +240,10 @@
           " * Nothing"
         ],
         "desc" : "Enable or disable debugging",
-        "def" : "PasteBoardExt:debug(enable)"
+        "parameters" : [
+          " * enable - Boolean indicating whether debugging should be on",
+          ""
+        ]
       },
       {
         "name" : "bindHotKeys",
@@ -249,11 +252,8 @@
           "\"edit\", \"openURL\"",
           ""
         ],
-        "parameters" : [
-          " * table - Table of action to key mappings.",
-          ""
-        ],
         "doc" : "Bind keys to methods. Valid keys for provided table are \"clean\", \"keystrokes\",\n\"edit\", \"openURL\"\n\nParameters:\n * table - Table of action to key mappings.\n\nReturns:\n * PasteBoardExt object",
+        "def" : "PasteBoardExt:bindHotKeys(table)",
         "notes" : [
 
         ],
@@ -263,7 +263,10 @@
           " * PasteBoardExt object"
         ],
         "desc" : "Bind keys to methods. Valid keys for provided table are \"clean\", \"keystrokes\",",
-        "def" : "PasteBoardExt:bindHotKeys(table)"
+        "parameters" : [
+          " * table - Table of action to key mappings.",
+          ""
+        ]
       },
       {
         "name" : "clean",
@@ -273,11 +276,8 @@
           "  * Remove leading and training whitepace",
           ""
         ],
-        "parameters" : [
-          "* None",
-          ""
-        ],
         "doc" : "Clean up the pasteboard:\n  * Convert stylized text to plain text\n  * Remove leading and training whitepace\n\nParameters:\n* None\n\nReturns:\n* Nothing",
+        "def" : "PasteBoardExt:clean()",
         "notes" : [
 
         ],
@@ -287,7 +287,10 @@
           "* Nothing"
         ],
         "desc" : "Clean up the pasteboard:",
-        "def" : "PasteBoardExt:clean()"
+        "parameters" : [
+          "* None",
+          ""
+        ]
       },
       {
         "name" : "keyStrokes",
@@ -295,11 +298,8 @@
           "Paste PasteBoard using hs.eventtap,keyStrokes()",
           ""
         ],
-        "parameters" : [
-          "* None",
-          ""
-        ],
         "doc" : "Paste PasteBoard using hs.eventtap,keyStrokes()\n\nParameters:\n* None\n\nReturns:\n* Nothing",
+        "def" : "PasteBoardExt:keyStrokes()",
         "notes" : [
 
         ],
@@ -309,7 +309,10 @@
           "* Nothing"
         ],
         "desc" : "Paste PasteBoard using hs.eventtap,keyStrokes()",
-        "def" : "PasteBoardExt:keyStrokes()"
+        "parameters" : [
+          "* None",
+          ""
+        ]
       },
       {
         "name" : "edit",
@@ -318,21 +321,21 @@
           "Currently uses MacVim and is specific to the Mac.",
           ""
         ],
-        "parameters" : [
-          "* None",
-          ""
-        ],
         "doc" : "Edit the PasteBuffer.\nCurrently uses MacVim and is specific to the Mac.\n\nParameters:\n* None\n\nReturns:\n* None",
+        "def" : "PasteBoardExt:edit()",
         "notes" : [
 
         ],
-        "signature" : "PasteBoardExt.edit()",
+        "signature" : "PasteBoardExt:edit()",
         "type" : "Method",
         "returns" : [
           "* None"
         ],
         "desc" : "Edit the PasteBuffer.",
-        "def" : "PasteBoardExt.edit()"
+        "parameters" : [
+          "* None",
+          ""
+        ]
       },
       {
         "name" : "openURL",
@@ -340,11 +343,8 @@
           "Open URL in clipboard",
           ""
         ],
-        "parameters" : [
-          "* None",
-          ""
-        ],
         "doc" : "Open URL in clipboard\n\nParameters:\n* None\n\nReturns:\n* True on success, false on failure",
+        "def" : "PasteBoardExt:openURL()",
         "notes" : [
 
         ],
@@ -354,11 +354,11 @@
           "* True on success, false on failure"
         ],
         "desc" : "Open URL in clipboard",
-        "def" : "PasteBoardExt:openURL()"
+        "parameters" : [
+          "* None",
+          ""
+        ]
       }
-    ],
-    "Command" : [
-
     ],
     "name" : "PasteBoardExt"
   }
