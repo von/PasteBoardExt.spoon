@@ -4,7 +4,7 @@ local PasteBoardExt = {}
 
 -- Metadata {{{ --
 PasteBoardExt.name="PasteBoardExt"
-PasteBoardExt.version="0.2"
+PasteBoardExt.version="0.3"
 PasteBoardExt.author="Von Welch"
 -- https://opensource.org/licenses/Apache-2.0
 PasteBoardExt.license="Apache-2.0"
@@ -68,19 +68,13 @@ end
 ---  * PasteBoardExt object
 
 function PasteBoardExt:bindHotKeys(table)
-  for feature,mapping in pairs(table) do
-    if feature == "clean" then
-       hs.hotkey.bind(mapping[1], mapping[2], function() self:clean() end)
-    elseif feature == "keyStrokes" then
-       hs.hotkey.bind(mapping[1], mapping[2], function() self:keyStrokes() end)
-    elseif feature == "edit" then
-       hs.hotkey.bind(mapping[1], mapping[2], function() self:edit() end)
-    elseif feature == "openURL" then
-       hs.hotkey.bind(mapping[1], mapping[2], function() self:openURL() end)
-     else
-       s.log.wf("Unrecognized key binding feature '%s'", feature)
-     end
-   end
+  local spec = {
+    clean = hs.fnutils.partial(self.clean, self),
+    keyStrokes = hs.fnutils.partial(self.keyStrokes, self),
+    edit = hs.fnutils.partial(self.edit, self),
+    openURL = hs.fnutils.partial(self.openURL, self)
+  }
+  hs.spoons.bindHotkeysToSpec(spec, mapping)
   return self
 end
 -- }}} PasteBoardExt:bindHotKeys() --
