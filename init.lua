@@ -96,7 +96,7 @@ function PasteBoardExt:clean()
   if not text then
     local stext = hs.pasteboard.readStyledText()
     if stext then
-      log.d("Converting from StyledText")
+      self.log.d("Converting from StyledText")
       text = stext:getString()
     end
   end
